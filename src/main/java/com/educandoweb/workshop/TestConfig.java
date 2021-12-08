@@ -10,9 +10,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.educandoweb.workshop.entities.Category;
 import com.educandoweb.workshop.entities.Order;
 import com.educandoweb.workshop.entities.User;
 import com.educandoweb.workshop.entities.enums.OrderStatus;
+import com.educandoweb.workshop.repositories.CategoryRepository;
 import com.educandoweb.workshop.repositories.OrderRepository;
 import com.educandoweb.workshop.repositories.UserRepository;
 
@@ -27,18 +29,17 @@ public class TestConfig implements CommandLineRunner{
 	@Autowired
 	private OrderRepository orderRepository;
 
+	@Autowired
+	private CategoryRepository categoryRepository;
+
 	@Override
 	public void run(String... args) throws Exception {
-		
-		Logger logger = LoggerFactory.getLogger(TestConfig.class); 
 		
 //		O id está preenchido com null, pois será gerado automaticamente.
 		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456"); 
 		User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456"); 
 		User u3 = new User(null, "John Red", "john@gmail.com", "966666666", "123456"); 
 		User u4 = new User(null, "Peter Blue", "peter@gmail.com", "955555555", "123456");
-		
-		logger.info("Logando Instant:" + Instant.now().toString());
 		
 		//A data/hora abaixo está no formato UTC e pode ser calculada
 		//para o valor local de quem desejar.
@@ -48,9 +49,16 @@ public class TestConfig implements CommandLineRunner{
 		Order o4 = new Order(null, Instant.parse("2019-08-20T17:51:29Z"), OrderStatus.SHIPPED,u3); 
 		Order o5 = new Order(null, Instant.parse("2019-08-19T12:32:25Z"), OrderStatus.CANCELED,u4); 
 
+		Category cat1 = new Category(null, "Electronics"); 
+		Category cat2 = new Category(null, "Books"); 
+		Category cat3 = new Category(null, "Computers"); 
+		
 		userRepository.saveAll(Arrays.asList(u1, u2, u3, u4));
 		
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3, o4, o5));
+
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		
 	}
 
 }
