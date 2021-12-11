@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.educandoweb.workshop.entities.Category;
 import com.educandoweb.workshop.entities.Order;
 import com.educandoweb.workshop.entities.OrderItem;
+import com.educandoweb.workshop.entities.Payment;
 import com.educandoweb.workshop.entities.Product;
 import com.educandoweb.workshop.entities.User;
 import com.educandoweb.workshop.entities.enums.OrderStatus;
@@ -67,6 +68,7 @@ public class TestConfig implements CommandLineRunner{
 		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, ""); 
 		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, ""); 
 		
+		
 		userRepository.saveAll(Arrays.asList(u1, u2, u3, u4));
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3, o4, o5));
 
@@ -88,7 +90,14 @@ public class TestConfig implements CommandLineRunner{
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 		
-				
+		
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		//Aproveitando o mapeamento em cascata, agora basta definir pay1 via o1.setPayment
+		//e salvar o1 novamente, que o JPA salva os dados de payment na tabela.
+		o1.setPayment(pay1);
+		orderRepository.save(o1);
+		
+		
 	}
 
 }

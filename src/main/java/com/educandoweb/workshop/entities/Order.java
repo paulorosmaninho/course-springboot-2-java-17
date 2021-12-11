@@ -2,9 +2,12 @@ package com.educandoweb.workshop.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +15,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.educandoweb.workshop.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -40,6 +49,21 @@ public class Order implements Serializable{
 
 	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> items = new HashSet<>();
+	
+	//O CascadeType.ALL força a geração do ID em Payment igual ao da entidade Order
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+	private Payment payment;
+	
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "ts_inclusao")
+	private Calendar timeStampInclusao;
+	
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "ts_alteracao")
+	private Calendar timeStampAlteracao;
+
 	
 	public Order() {
 	}
@@ -85,9 +109,34 @@ public class Order implements Serializable{
 	public void setClient(User client) {
 		this.client = client;
 	}
+	
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
 
 	public Set<OrderItem> getItems() {
 		return items;
+	}
+	
+
+	public Calendar getTimeStampInclusao() {
+		return timeStampInclusao;
+	}
+
+	public void setTimeStampInclusao(Calendar timeStampInclusao) {
+		this.timeStampInclusao = timeStampInclusao;
+	}
+
+	public Calendar getTimeStampAlteracao() {
+		return timeStampAlteracao;
+	}
+
+	public void setTimeStampAlteracao(Calendar timeStampAlteracao) {
+		this.timeStampAlteracao = timeStampAlteracao;
 	}
 
 	@Override
