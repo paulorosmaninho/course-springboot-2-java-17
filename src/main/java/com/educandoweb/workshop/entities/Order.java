@@ -138,6 +138,17 @@ public class Order implements Serializable{
 	public void setTimeStampAlteracao(Calendar timeStampAlteracao) {
 		this.timeStampAlteracao = timeStampAlteracao;
 	}
+	
+	public Double getTotal() {
+		
+		Double total = 0.0;
+		
+		for(OrderItem orderItem : items) {
+			total += orderItem.getSubTotal();
+		}
+		
+		return total;
+	}
 
 	@Override
 	public int hashCode() {

@@ -64,6 +64,13 @@ public class OrderItem implements Serializable{
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	
+	//Para que o Jackson reconheça o método é preciso seguir o padrão
+	//de nomenclatura do Java EE. 
+	//Exemplo: getNomeDoMetodo(), setNomeDoMetodo()
+	public Double getSubTotal() {
+		return (this.price * this.quantity);
+	}
 
 	@Override
 	public int hashCode() {
