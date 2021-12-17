@@ -93,7 +93,10 @@ public class Order implements Serializable{
 	}
 
 	public OrderStatus getOrderStatus() {
-		return OrderStatus.valueOf(orderStatus);
+		if(this.orderStatus!=null) {
+			return OrderStatus.valueOf(orderStatus);
+		}
+		return null;
 	}
 
 	public void setOrderStatus(OrderStatus orderStatus) {
