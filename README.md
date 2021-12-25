@@ -70,9 +70,12 @@ Esses recursos podem ser acessados ou manipulados a partir das operações abaix
 ```bash
 # clonar repositório
 git clone https://github.com/paulorosmaninho/course-springboot-2-java-17.git
-
+# entrar na pasta local do projeto
+exemplo: cd course-springboot-2-java-17
+# executar o projeto
+mvnw spring-boot:run
+# utilizar o POSTMAN para executar os métodos
 ```
-
 ## Back end
 Pré-requisitos: 
 Java versão 17
