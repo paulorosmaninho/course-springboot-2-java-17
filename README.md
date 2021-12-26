@@ -70,9 +70,26 @@ Esses recursos podem ser acessados ou manipulados a partir das operações abaix
 ```bash
 # clonar repositório
 git clone https://github.com/paulorosmaninho/course-springboot-2-java-17.git
+
 # entrar na pasta local do projeto
 exemplo: cd course-springboot-2-java-17
-# executar o projeto
+
+# há duas formas de testar local. Com banco de dados H2, que 
+# carrega as tabelas automaticamente e com PostgreSQL, que é preciso cadastrar.
+
+# forma 1) testar com o banco de dados H2, que carrega as tabelas automaticamente:
+# a. acessar a pasta \src\main\resources
+exemplo: cd \src\main\resources
+# b. localizar o arquivo application.properties e editá-lo.
+# c. localizar a linha: #spring.profiles.active=test e tirar o jogo da velha.
+# c.1. ficará desta forma: spring.profiles.active=test
+# d. localizar a linha: spring.profiles.active=dev e colocar o jogo da velha.
+# d.1. ficará desta forma: #spring.profiles.active=dev
+
+# forma 2) testar com banco de dados PostgreSQL
+# a. basta manter a configuração atual, mas as tabelas precisão ser populadas.
+
+# para executar o projeto, basta rodar o comando abaixo dentro da pasta principal
 mvnw spring-boot:run
 # utilizar o POSTMAN para executar os métodos
 ```
