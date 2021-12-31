@@ -4,9 +4,9 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/paulorosmaninho/course-springboot-2-java-17)
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/paulorosmaninho/course-springboot-2-java-17/blob/master/LICENSE) 
 
-# Sobre o projeto
+### Disponível no Heroku através da URL: https://course-spring-boot-java-17.herokuapp.com/
 
-https://course-spring-boot-java-17.herokuapp.com/
+# Sobre o projeto
 
 Este projeto faz parte do curso de Java do professor Nélio Alves.
 
